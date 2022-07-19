@@ -12,6 +12,7 @@ class Tag(models.Model):
 
 class Todo(models.Model):
     title = models.CharField(max_length=70)
+    created = models.DateField(auto_now=True)
     description = models.TextField(blank=True)
     priority = models.CharField(
         max_length=6,
@@ -19,6 +20,9 @@ class Todo(models.Model):
     )
     tags = models.ManyToManyField(Tag)
     is_done = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['created']
 
     def __str__(self):
         return self.title
